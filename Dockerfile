@@ -1,6 +1,8 @@
-FROM ubuntu:latest
-LABEL authors="1037814"
-ADD target/*.jar app.jar
-ENTRYPOINT ["top", "-b"]
-
-
+FROM openjdk:21
+WORKDIR /Product-Service
+CMD ["./gradlew", "clean"]
+CMD ["./gradlew", "bootJar"]
+COPY ./build/libs/*.jar /app.jar
+EXPOSE 8090
+CMD ["ls","./"]
+ENTRYPOINT ["java","-jar", "/app.jar"]
